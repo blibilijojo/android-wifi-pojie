@@ -7,4 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- Missing Switch Colors (Used common placeholders) -->
+    <color name="switch_circle_normal">#999999</color>
+    <color name="switch_track_checked">#80FF6200EE</color>
+    <color name="switch_track_normal">#4D000000</color>
 </resources>
