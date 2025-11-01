@@ -38,8 +38,6 @@
             android:layout_height="wrap_content"
             android:text="No dictionary selected"
             android:padding="8dp"/>
-
-        <!-- ... [Rest of your layout, like single password checkbox, timeout, radio buttons] ... -->
         
         <CheckBox
             android:id="@+id/CheckUsePass"
@@ -72,24 +70,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp">
+
             <RadioButton
                 android:id="@+id/RadioApi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="API Mode (< Android 10)"
+                android:text="API Mode (&lt; Android 10)"
                 android:checked="true"/>
+
             <RadioButton
                 android:id="@+id/RadioApi29"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="API 29 Mode (>= Android 10)"/>
+
             <RadioButton
                 android:id="@+id/RadioRoot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Root/CMD Mode"/>
-        </RadioGroup>
 
+        </RadioGroup>
 
         <Button
             android:id="@+id/BtnStart"
