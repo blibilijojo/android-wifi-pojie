@@ -1,402 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root_layout"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="false"
-    android:orientation="vertical"
-    tools:context=".PojieActivity">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="12dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:textColor="@color/black"
-                android:textSize="24sp" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/layout1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="16dp"
-            android:paddingTop="16dp"
-            android:paddingRight="16dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/wifi_name" />
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <EditText
-                            android:id="@+id/wifi_ssid"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:autofillHints=""
-                            android:ems="10"
-                            android:inputType="text"
-                            tools:ignore="LabelFor,NestedWeights"
-                            tools:layout_editor_absoluteX="64dp"
-                            tools:layout_editor_absoluteY="23dp" />
-
-                        <Button
-                            android:id="@+id/button6"
-                            style="@style/App.button"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/choose_wifi" />
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="8dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/one_try_time_ms" />
-
-                    <EditText
-                        android:id="@+id/try_time"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:autofillHints=""
-                        android:ems="10"
-                        android:inputType="number"
-                        android:text="@string/try_time"
-                        tools:ignore="LabelFor,NestedWeights" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/dictionary_file" />
-
-                    <Button
-                        android:id="@+id/dictionary_select"
-                        style="@style/App.button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/input_tip" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView5"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/start_line" />
-
-                    <EditText
-                        android:id="@+id/start_line"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:autofillHints=""
-                        android:ems="10"
-                        android:inputType="number"
-                        android:text="@string/_1"
-                        tools:ignore="LabelFor" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="连接失败标志：" />
-
-            <View.SegmentedButtonGroup
-                android:id="@+id/fail_sign"
-                android:layout_width="match_parent"
-                android:layout_height="36dp"
-                android:layout_marginTop="4dp" />
-
-
-            <LinearLayout
-                android:id="@+id/fail_sign_timeout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:ignore="UselessParent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="8dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="握手超时时间："
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <EditText
-                        android:id="@+id/fail_sign_timeout_input"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:autofillHints=""
-                        android:ems="10"
-                        android:inputType="number"
-                        android:text="1000"
-                        tools:ignore="LabelFor" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="ms"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/fail_sign_count"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="最大握手次数："
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:id="@+id/fail_sign_count_input"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:autofillHints=""
-                    android:ems="10"
-                    android:inputType="number"
-                    android:text="1"
-                    tools:ignore="LabelFor" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="（命令行模式专属）"
-                    android:textSize="16sp" />
-
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/startbtn"
-                style="@style/App.button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:backgroundTint="@android:color/holo_blue_dark"
-                android:text="@string/startbtn" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layout2"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <CheckBox
-                    android:id="@+id/autoscroll"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:text="@string/auto_scroll" />
-
-                <Button
-                    android:id="@+id/copybtn"
-                    style="@style/App.button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/copy_str"
-                    tools:ignore="PrivateResource" />
-
-                <Button
-                    android:id="@+id/clearbtn"
-                    style="@style/App.button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:backgroundTint="@android:color/holo_red_light"
-                    android:text="@string/clear_output" />
-            </LinearLayout>
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="@color/light_grey"
-                android:fillViewport="true"
-                android:overScrollMode="always"
-                android:scrollbars="vertical"
-                tools:ignore="NestedWeights">
-
-                <HorizontalScrollView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:overScrollMode="always"
-                    android:scrollbars="horizontal">
-
-                    <TextView
-                        android:id="@+id/commandOutput"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="monospace"
-                        android:gravity="top"
-                        android:scrollbars="horizontal|vertical"
-                        android:textColor="@color/black"
-                        android:textIsSelectable="true" />
-
-                </HorizontalScrollView>
-
-            </ScrollView>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <ProgressBar
-                        android:id="@+id/running_tip"
-                        style="?android:attr/progressBarStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="4dp"
-                        android:minWidth="60dp"
-                        android:visibility="gone" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-
-                    <TextView
-                        android:id="@+id/progress_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/progress_tip" />
-
-                    <ProgressBar
-                        android:id="@+id/progressBar"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-    </LinearLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="24dp"
-        android:contentDescription="进入小窗模式"
-        app:backgroundTint="@color/main_color_light"
-        app:shapeAppearanceOverlay="@style/Widget.Material3.FloatingActionButton.Primary"
-        app:srcCompat="@drawable/ic_pip"
-        app:tint="@color/main_color_dark" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Target Wi-Fi SSID:" />
+
+        <EditText
+            android:id="@+id/EtSSID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="e.g., MyHomeWiFi" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dictionary:"
+            android:layout_marginTop="16dp"/>
+
+        <Button
+            android:id="@+id/BtnSelectDict"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Dictionary" />
+
+        <TextView
+            android:id="@+id/TvDictPath"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No dictionary selected"
+            android:padding="8dp"/>
+
+        <!-- ... [Rest of your layout, like single password checkbox, timeout, radio buttons] ... -->
+        
+        <CheckBox
+            android:id="@+id/CheckUsePass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Test Single Password" />
+
+        <EditText
+            android:id="@+id/EtPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter single password"
+            android:enabled="false"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Timeout (seconds):" />
+
+        <EditText
+            android:id="@+id/EtTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:text="10" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+            <RadioButton
+                android:id="@+id/RadioApi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="API Mode (< Android 10)"
+                android:checked="true"/>
+            <RadioButton
+                android:id="@+id/RadioApi29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="API 29 Mode (>= Android 10)"/>
+            <RadioButton
+                android:id="@+id/RadioRoot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Root/CMD Mode"/>
+        </RadioGroup>
+
+
+        <Button
+            android:id="@+id/BtnStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            android:layout_marginTop="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status:"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/TvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Idle"
+            android:padding="8dp"/>
+    </LinearLayout>
+</ScrollView>
