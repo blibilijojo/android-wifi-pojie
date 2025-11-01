@@ -1,17 +1,17 @@
 plugins {
-    alias(libs.plugins.android.application)
+    id 'com.android.application'
 }
 
 android {
-    namespace 'wifi.pojie'
-    compileSdk 36
+    namespace 'com.pojie.wifipojie'
+    compileSdk 33
 
     defaultConfig {
-        applicationId "wifi.pojie"
-        minSdk 24
-        targetSdk 28
-        versionCode 21
-        versionName "2.1"
+        applicationId "com.pojie.wifipojie"
+        minSdk 21
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -23,37 +23,16 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
-    }
-    buildFeatures {
-        aidl = true
-    }
-
-    lint {
-        abortOnError false
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
-    implementation libs.material.v1110
-    implementation libs.androidx.preference.v120
-    implementation libs.appcompat
-    implementation libs.material
-    implementation libs.recyclerview
-    implementation libs.androidx.recyclerview
-    implementation libs.androidx.constraintlayout
-    implementation libs.swiperefreshlayout
-    implementation libs.material.icons
-    implementation libs.androidx.preference
-    implementation libs.androidx.core.splashscreen
-    testImplementation libs.junit
-    androidTestImplementation libs.ext.junit
-    androidTestImplementation libs.espresso.core
-    implementation libs.shizuku.provider
-    implementation libs.shizuku.api
-    implementation libs.gson
-
-    implementation libs.markwon.core
-    implementation libs.material
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
