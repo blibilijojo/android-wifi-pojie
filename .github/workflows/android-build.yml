@@ -1,111 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+# 工作流的名称
+name: Android CI Build
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+# 触发工作流的事件
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Target Wi-Fi SSID:" />
+# 定义工作任务
+jobs:
+  build:
+    # 指定运行此任务的虚拟机环境
+    runs-on: ubuntu-latest
 
-        <EditText
-            android:id="@+id/EtSSID"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="e.g., MyHomeWiFi" />
+    # 定义任务的步骤
+    steps:
+    # 检出代码
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dictionary:"
-            android:layout_marginTop="16dp"/>
+    # 设置 Java 环境
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
 
-        <Button
-            android:id="@+id/BtnSelectDict"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Select Dictionary" />
+    # 授予 gradlew 文件执行权限
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
 
-        <TextView
-            android:id="@+id/TvDictPath"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="No dictionary selected"
-            android:padding="8dp"/>
-        
-        <CheckBox
-            android:id="@+id/CheckUsePass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Test Single Password" />
+    # 使用 Gradle 构建项目
+    - name: Build with Gradle
+      run: ./gradlew assembleDebug
 
-        <EditText
-            android:id="@+id/EtPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter single password"
-            android:enabled="false"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Timeout (seconds):" />
-
-        <EditText
-            android:id="@+id/EtTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:text="10" />
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp">
-            <RadioButton
-                android:id="@+id/RadioApi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="API Mode (&lt; Android 10)"
-                android:checked="true"/>
-            <RadioButton
-                android:id="@+id/RadioApi29"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="API 29 Mode (>= Android 10)"/>
-            <RadioButton
-                android:id="@+id/RadioRoot"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Root/CMD Mode"/>
-        </RadioGroup>
-
-        <Button
-            android:id="@+id/BtnStart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Start"
-            android:layout_marginTop="24dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Status:"
-            android:layout_marginTop="16dp" />
-
-        <TextView
-            android:id="@+id/TvStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Idle"
-            android:padding="8dp"/>
-    </LinearLayout>
-</ScrollView>
+    # 上传构建产物 (APK)
+    - name: Upload APK artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-debug-apk
+        path: app/build/outputs/apk/debug/app-debug.apk
