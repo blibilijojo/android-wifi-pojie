@@ -1,47 +1,111 @@
-# 工作流的名称
-name: Android CI Build
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-# 触发工作流的事件
-on:
-  # 当有代码 push 到 main 分支时触发
-  push:
-    branches: [ "main" ]
-  # 当有 pull request 合并到 main 分支时触发
-  pull_request:
-    branches: [ "main" ]
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-# 定义工作任务
-jobs:
-  build:
-    # 指定运行此任务的虚拟机环境
-    runs-on: ubuntu-latest
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Target Wi-Fi SSID:" />
 
-    # 定义任务的步骤
-    steps:
-    # 第一步：检出代码
-    - name: Checkout code
-      uses: actions/checkout@v4 # 建议也更新这个，v4是最新版
+        <EditText
+            android:id="@+id/EtSSID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="e.g., MyHomeWiFi" />
 
-    # 第二步：设置 Java 环境
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4 # 建议也更新这个，v4是最新版
-      with:
-        java-version: '17'
-        distribution: 'temurin'
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dictionary:"
+            android:layout_marginTop="16dp"/>
 
-    # 第三步：授予 gradlew 文件执行权限
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+        <Button
+            android:id="@+id/BtnSelectDict"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Dictionary" />
 
-    # 第四步：使用 Gradle 构建项目
-    - name: Build with Gradle
-      run: ./gradlew assembleDebug
+        <TextView
+            android:id="@+id/TvDictPath"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No dictionary selected"
+            android:padding="8dp"/>
+        
+        <CheckBox
+            android:id="@+id/CheckUsePass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Test Single Password" />
 
-    # 第五-步：上传构建产物 (APK) - 已修正
-    - name: Upload APK artifact
-      uses: actions/upload-artifact@v4 # <-- 已更新到 v4
-      with:
-        # 产物的名称
-        name: app-debug-apk
-        # 要上传的文件的路径
-        path: app/build/outputs/apk/debug/app-debug.apk
+        <EditText
+            android:id="@+id/EtPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter single password"
+            android:enabled="false"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Timeout (seconds):" />
+
+        <EditText
+            android:id="@+id/EtTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:text="10" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+            <RadioButton
+                android:id="@+id/RadioApi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="API Mode (&lt; Android 10)"
+                android:checked="true"/>
+            <RadioButton
+                android:id="@+id/RadioApi29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="API 29 Mode (>= Android 10)"/>
+            <RadioButton
+                android:id="@+id/RadioRoot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Root/CMD Mode"/>
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/BtnStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            android:layout_marginTop="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status:"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/TvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Idle"
+            android:padding="8dp"/>
+    </LinearLayout>
+</ScrollView>
