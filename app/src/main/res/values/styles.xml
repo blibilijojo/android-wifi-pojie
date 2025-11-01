@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="App" />
+
+    <style name="App.button" parent="Widget.AppCompat.Button">
+    </style>
+
+    <style name="App.navigationView" parent="Widget.Design.NavigationView">
+    </style>
+</resources>
