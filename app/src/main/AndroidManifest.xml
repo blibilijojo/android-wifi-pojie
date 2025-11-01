@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.pojie.wifipojie">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- ... [Keep your existing permissions] ... -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 
     <application
@@ -15,23 +17,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.安卓WiFi破解器">
-
-        <activity android:name=".PojieActivity">
+        android:theme="@style/Theme.AppCompat.Light"
+        android:requestLegacyExternalStorage="true">
+        <activity
+            android:name=".PojieActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- Add this new Activity registration -->
-        <activity android:name=".DictionaryManagerActivity" />
-        
-        <service
-            android:name=".WifiPojieService"
-            android:enabled="true"
-            android:exported="false" />
-
     </application>
 
 </manifest>
