@@ -225,6 +225,27 @@ public class WifiPojieService extends Service {
         stopSelf();
     }
 
+    /**
+     * 检查是否有保存的进度
+     * @param ssid WiFi名称
+     * @return 是否有保存的进度
+     */
+    public boolean hasSavedProgress(String ssid) {
+        android.content.SharedPreferences progressPrefs = getSharedPreferences("wifi_pojie_progress", MODE_PRIVATE);
+        String key = "progress_" + ssid;
+        return progressPrefs.contains(key);
+    }
+    
+    /**
+     * 清理指定SSID的保存进度
+     * @param ssid WiFi名称
+     */
+    public void clearSavedProgress(String ssid) {
+        android.content.SharedPreferences progressPrefs = getSharedPreferences("wifi_pojie_progress", MODE_PRIVATE);
+        String key = "progress_" + ssid;
+        progressPrefs.edit().remove(key).apply();
+    }
+
     @Override
     public void onDestroy() {
         isRunning = false;

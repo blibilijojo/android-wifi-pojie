@@ -92,6 +92,24 @@
             android:exported="true"
             android:theme="@style/App.Theme" />
 
+        <!-- 密码本管理相关Activity -->
+        <activity
+            android:name=".PasswordBookManagerActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
+            android:name=".PasswordBookEditActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
+            android:name=".PasswordGeneratorActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
+            android:name=".PasswordBookCategoryActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+
     </application>
 
 </manifest>

@@ -19,7 +19,57 @@
     <string name="select_network_button_text">选择</string>
     <string name="cancel_button_text">取消</string>
     <string name="uninstall_title">⚡️你⚡️卸⚡️你⚡️大⚡️坝⚡️</string>
-    <string name="uninstall_tip">吾日三省吾身：观人妙作，而不赞乎？观其有益，不纳藏乎？得其所用，而不币之乎？\n注释：①〔赞〕点赞 ②〔藏〕收藏 ③〔币〕投币，这里名词用作动词，为…而投币（刻意强调）\n\n（我们专门为小米手机桌面卸载添加了提示，提升用户体验）</string>
+    <string name="uninstall_tip">吾日三省吾身：观人妙作，而不赞乎？观其有益，不纳藏乎？得其所用，而不币之乎？
+注释：①〔赞〕点赞 ②〔藏〕收藏 ③〔币〕投币，这里名词用作动词，为…而投币（刻意强调）
+
+（我们专门为小米手机桌面卸载添加了提示，提升用户体验）</string>
     <string name="app_description">一款通过暴力破解密码本的方式连接wifi的工具</string>
+
+    <!-- 密码本管理相关字符串 -->
+    <string name="password_book_manager">密码本管理</string>
+    <string name="add_password_book">添加密码本</string>
+    <string name="edit_password_book">编辑密码本</string>
+    <string name="delete_password_book">删除密码本</string>
+    <string name="password_book_name">密码本名称</string>
+    <string name="password_book_category">密码本分类</string>
+    <string name="default_category">默认分类</string>
+    <string name="password_count">密码数量: %d</string>
+    <string name="created_at">创建于: %s</string>
+    <string name="confirm_delete_password_book">确定要删除密码本 "%s" 吗？</string>
+    <string name="add_password">添加密码</string>
+    <string name="password">密码</string>
+    <string name="password_length">密码长度</string>
+    <string name="generate_password">生成密码</string>
+    <string name="password_generator">密码生成器</string>
+    <string name="generate">生成</string>
+    <string name="copy_password">复制密码</string>
+    <string name="add_to_password_book">添加到密码本</string>
+    <string name="password_strength">密码强度: %s</string>
+    <string name="weak">弱</string>
+    <string name="medium">中</string>
+    <string name="strong">强</string>
+    <string name="very_strong">非常强</string>
+    <string name="include_uppercase">包含大写字母</string>
+    <string name="include_lowercase">包含小写字母</string>
+    <string name="include_numbers">包含数字</string>
+    <string name="include_special_chars">包含特殊字符</string>
+    <string name="exclude_similar_chars">排除相似字符</string>
+    <string name="password_book_categories">密码本分类</string>
+    <string name="add_category">添加分类</string>
+    <string name="category_name">分类名称</string>
+    <string name="confirm_delete_category">确定要删除分类 "%s" 吗？所有使用此分类的密码本将被移至默认分类。</string>
+    <string name="default_category_cannot_delete">默认分类无法删除</string>
+    <string name="import_export">导入/导出</string>
+    <string name="import_password_book">导入密码本</string>
+    <string name="export_password_book">导出密码本</string>
+    <string name="select_file">选择文件</string>
+    <string name="save_file">保存文件</string>
+    <string name="import_success">导入成功</string>
+    <string name="export_success">导出成功</string>
+    <string name="import_failed">导入失败</string>
+    <string name="export_failed">导出失败</string>
+    <string name="saved_progress_found">发现保存的进度，是否继续？</string>
+    <string name="continue_cracking">继续</string>
+    <string name="new_cracking">重新开始</string>
 </resources>
 

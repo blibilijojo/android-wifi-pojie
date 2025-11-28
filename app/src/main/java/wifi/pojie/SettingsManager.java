@@ -26,6 +26,14 @@ public class SettingsManager {
     public static final String KEY_SHOW_NOTIFICATION = "show_notification";
     public static final String KEY_SHOW_GUIDE = "show_guide";
     public static final String KEY_KEEP_SCREEN_ON = "keep_screen_on";
+    // 新增配置键
+    public static final String KEY_LAST_WIFI_SSID = "last_wifi_ssid";
+    public static final String KEY_LAST_DICTIONARY_PATH = "last_dictionary_path";
+    public static final String KEY_LAST_START_LINE = "last_start_line";
+    public static final String KEY_LAST_TRY_TIME = "last_try_time";
+    public static final String KEY_LAST_FAIL_SIGN = "last_fail_sign";
+    public static final String KEY_LAST_FAIL_TIMEOUT = "last_fail_timeout";
+    public static final String KEY_LAST_FAIL_COUNT = "last_fail_count";
 
     private final SharedPreferences prefs;
     private final Context context;
@@ -108,6 +116,98 @@ public class SettingsManager {
 
     public void setBoolean(String key, boolean value) {
         prefs.edit().putBoolean(key, value).apply();
+    }
+
+    // 新增String类型支持
+    public String getString(String key) {
+        return getString(key, null);
+    }
+
+    public String getString(String key, String defaultValue) {
+        if (prefs.contains(key)) {
+            Object storedValue = prefs.getAll().get(key);
+            if (storedValue instanceof String) {
+                return prefs.getString(key, defaultValue);
+            }
+        }
+        String defaultValueStr = defaultValues.get(key);
+        if (defaultValueStr != null) {
+            setString(key, defaultValueStr);
+            return defaultValueStr;
+        }
+        return defaultValue;
+    }
+
+    public void setString(String key, String value) {
+        prefs.edit().putString(key, value).apply();
+    }
+
+    // 新增float类型支持
+    public float getFloat(String key) {
+        return getFloat(key, 0.0f);
+    }
+
+    public float getFloat(String key, float defaultValue) {
+        if (prefs.contains(key)) {
+            Object storedValue = prefs.getAll().get(key);
+            if (storedValue instanceof Float) {
+                return prefs.getFloat(key, defaultValue);
+            }
+        }
+        String defaultValueStr = defaultValues.get(key);
+        if (defaultValueStr != null) {
+            try {
+                float value = Float.parseFloat(defaultValueStr);
+                setFloat(key, value);
+                return value;
+            } catch (NumberFormatException e) {
+                Log.e(TAG, "Invalid default value for key: " + key, e);
+            }
+        }
+        return defaultValue;
+    }
+
+    public void setFloat(String key, float value) {
+        prefs.edit().putFloat(key, value).apply();
+    }
+
+    // 新增long类型支持
+    public long getLong(String key) {
+        return getLong(key, 0L);
+    }
+
+    public long getLong(String key, long defaultValue) {
+        if (prefs.contains(key)) {
+            Object storedValue = prefs.getAll().get(key);
+            if (storedValue instanceof Long) {
+                return prefs.getLong(key, defaultValue);
+            }
+        }
+        String defaultValueStr = defaultValues.get(key);
+        if (defaultValueStr != null) {
+            try {
+                long value = Long.parseLong(defaultValueStr);
+                setLong(key, value);
+                return value;
+            } catch (NumberFormatException e) {
+                Log.e(TAG, "Invalid default value for key: " + key, e);
+            }
+        }
+        return defaultValue;
+    }
+
+    public void setLong(String key, long value) {
+        prefs.edit().putLong(key, value).apply();
+    }
+
+    // 清除所有配置
+    public void clearAll() {
+        prefs.edit().clear().apply();
+    }
+
+    // 移除特定配置
+    public void remove(String key) {
+        prefs.edit().remove(key).apply();
     }
 
     public Map<String, ?> getAllSettings() {
